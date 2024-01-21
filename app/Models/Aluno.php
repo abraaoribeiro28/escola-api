@@ -18,6 +18,10 @@ class Aluno extends Model
         'turma_id'
     ];
 
+    protected $casts = [
+        'nascimento' => 'date:d/m/Y'
+    ];
+
     /**
      * Define a relação entre aluno e turma
      *
