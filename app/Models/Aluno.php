@@ -11,6 +11,7 @@ class Aluno extends Model
     use HasFactory;
 
     protected $table = 'alunos';
+
     protected $fillable = [
         'nome',
         'nascimento',
@@ -18,8 +19,16 @@ class Aluno extends Model
         'turma_id'
     ];
 
-    protected $casts = [
-        'nascimento' => 'date:d/m/Y'
+    protected $casts = ['nascimento' => 'date:d/m/Y'];
+
+    // protected $hidden = ['created_at', 'updated_at'];
+
+    protected $visible = [
+        'id',
+        'nome',
+        'nascimento',
+        'genero',
+        'turma_id'
     ];
 
     /**
