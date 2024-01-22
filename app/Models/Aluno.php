@@ -29,7 +29,7 @@ class Aluno extends Model
      *
      * @var array
      */
-    protected $casts = ['nascimento' => 'date:d/m/Y'];
+    // protected $casts = ['nascimento' => 'date:d/m/Y'];
 
     /**
      * Define os campos não visiveis no momento da serialização
@@ -43,21 +43,21 @@ class Aluno extends Model
      *
      * @var array
      */
-    protected $visible = [
-        'id',
-        'nome',
-        'nascimento',
-        'genero',
-        'turma_id',
-        'aceito'
-    ];
+    // protected $visible = [
+    //     'id',
+    //     'nome',
+    //     'nascimento',
+    //     'genero',
+    //     'turma_id',
+    //     'aceito'
+    // ];
 
     /**
      * Define os acessores enviados na serialização
      *
      * @var array
      */
-    protected $appends = ['aceito'];
+    // protected $appends = ['aceito'];
 
     /**
      * Define a relação entre aluno e turma
@@ -73,8 +73,8 @@ class Aluno extends Model
      *
      * @return string
      */
-    public function getAceitoAttribute(): string
-    {
-        return $this->attributes['nascimento'] > '2001-01-01' ? 'aceito' : 'Não aceito';
-    }
+    // public function getAceitoAttribute(): string
+    // {
+    //     return $this->attributes['nascimento'] > '2001-01-01' ? 'aceito' : 'Não aceito';
+    // }
 }

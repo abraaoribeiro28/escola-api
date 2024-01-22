@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aluno;
 use Illuminate\Http\Response;
 use App\Http\Requests\AlunoRequest;
+use App\Http\Resources\AlunoResource;
 use Illuminate\Database\Eloquent\Collection;
 
 class AlunoCrontoller extends Controller
@@ -37,11 +38,11 @@ class AlunoCrontoller extends Controller
      * Display the specified resource.
      *
      * @param Aluno $aluno
-     * @return Aluno
+     * @return AlunoResource
      */
-    public function show(Aluno $aluno): Aluno
+    public function show(Aluno $aluno): AlunoResource
     {
-        return $aluno;
+        return new AlunoResource($aluno);
     }
 
     /**
