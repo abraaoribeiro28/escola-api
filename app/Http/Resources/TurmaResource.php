@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AlunoResource extends JsonResource
+class TurmaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class AlunoResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'nome' => $this->nome,
-            'nascimento' => $this->nascimento,
-            'genero' => $this->genero,
-            'turma' => new TurmaResource($this->turma)
+            'id' => $this->id,
+            'descricao' => $this->descricao
         ];
     }
 }
