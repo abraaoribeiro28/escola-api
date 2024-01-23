@@ -19,7 +19,7 @@ class AlunoCrontoller extends Controller
     public function index(): AlunoCollection
     {
         return new AlunoCollection(
-            Aluno::with('turma')->get()
+            Aluno::with('turma')->paginate(2)
         );
     }
 
