@@ -18,7 +18,7 @@ class AlunoResource extends JsonResource
             'nome' => $this->nome,
             'nascimento' => $this->nascimento,
             'genero' => $this->genero,
-            'turma' => new TurmaResource($this->turma)
+            'turma' => new TurmaResource($this->whenLoaded('turma'))
         ];
     }
 }

@@ -18,7 +18,9 @@ class AlunoCrontoller extends Controller
      */
     public function index(): AlunoCollection
     {
-        return new AlunoCollection(Aluno::get());
+        return new AlunoCollection(
+            Aluno::with('turma')->get()
+        );
     }
 
     /**
