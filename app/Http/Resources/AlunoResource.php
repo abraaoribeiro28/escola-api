@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Services\LinksGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,28 +15,17 @@ class AlunoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $links = new LinksGenerator();
+        $links->get(route('alunos.show', $this->id), 'aluno_detalhes');
+        $links->put(route('alunos.update', $this->id), 'aluno_atualizar');
+        $links->delete(route('alunos.destroy', $this->id), 'aluno_remover');
+
         return [
             'nome' => $this->nome,
             'nascimento' => $this->nascimento,
             'genero' => $this->genero,
             'turma' => new TurmaResource($this->whenLoaded('turma')),
-            'links' => [
-                [
-                    'type' => 'GET',
-                    'url' => route('alunos.show', $this->id),
-                    'rel' => 'aluno_detalhes'
-                ],
-                [
-                    'type' => 'PUT',
-                    'url' => route('alunos.update', $this->id),
-                    'rel' => 'aluno_atualizar'
-                ],
-                [
-                    'type' => 'DELETE',
-                    'url' => route('alunos.destroy', $this->id),
-                    'rel' => 'aluno_remover'
-                ]
-            ]
+            'links' => $links->toArray()
         ];
     }
 }
