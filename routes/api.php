@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlunoCrontoller;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,15 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('login', [AuthenticatedSessionController::class, 'apiLogin']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('alunos', AlunoCrontoller::class);
-
-
-// Route::get('/alunos', [AlunoCrontoller::class, 'index'])->name('alunos.index');
-// Route::get('/alunos/{aluno}', [AlunoCrontoller::class, 'show'])->name('alunos.show');
-// Route::post('/alunos', [AlunoCrontoller::class, 'store'])->name('alunos.store');
-// Route::put('/alunos/{aluno}', [AlunoCrontoller::class, 'update'])->name('alunos.update');
-// Route::delete('/alunos/{aluno}', [AlunoCrontoller::class, 'destroy'])->name('alunos.destroy');
+Route::apiResource('alunos', AlunoCrontoller::class)->middleware('auth:sanctum');

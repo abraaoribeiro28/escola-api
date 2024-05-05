@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -44,5 +47,18 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function apiLogin(LoginRequest $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if(! $user || ! Hash::check($request->password, $user->password)){
+            throw ValidationException::withMessages([
+                'email' => ['As credenciais fornecidas estão incorretas.']
+            ]);
+        }
+
+        return $user->createToken($request->device_name)->plainTextToken;
     }
 }
